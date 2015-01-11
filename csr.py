@@ -17,6 +17,8 @@ class CSR:
     @classmethod
     def from_binary(cls, binary_csr):
         "Initialise CSR from a binary CSR"
+        """TODO: implement me"""
+        raise NotImplementedError
 
     @property
     def cn(self):
