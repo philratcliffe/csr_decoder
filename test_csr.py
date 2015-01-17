@@ -6,6 +6,17 @@ class TestCSR(unittest.TestCase):
     def setUp(self):
         self.valid_csr = CSR.from_pem(VALID_CSR)
 
+    def test_subject(self):
+        expected_result = [
+            ('C', 'gb'), ('ST', 'staffs'), ('L', 'stoke'),
+            ('O', 'CSR Decoders'), ('CN', 'www.decodecsr.co.uk'),
+        ]
+
+        self.assertItemsEqual(
+            self.valid_csr.subject,
+            expected_result,
+            "subject does not equal expected subject")
+
     def test_cn(self):
         self.assertEqual(
             self.valid_csr.cn,
