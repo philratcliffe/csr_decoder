@@ -10,6 +10,7 @@ class CSR:
     @classmethod
     def from_pem(cls, pem_csr):
         """Initialise CSR from a PEM encoded CSR"""
+
         x509 = OpenSSL.crypto.load_certificate_request(
             OpenSSL.crypto.FILETYPE_PEM, pem_csr)
         return cls(x509)
@@ -17,8 +18,10 @@ class CSR:
     @classmethod
     def from_binary(cls, binary_csr):
         """Initialise CSR from a binary CSR"""
-        """TODO: implement me"""
-        raise NotImplementedError
+
+        x509 = OpenSSL.crypto.load_certificate_request(
+            OpenSSL.crypto.FILETYPE_ASN1, binary_csr)
+        return cls(x509)
 
     @property
     def cn(self):

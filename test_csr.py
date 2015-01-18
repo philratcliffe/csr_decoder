@@ -1,10 +1,10 @@
+import os
+
 import unittest
 from csr import CSR
 
 
-class TestCSR(unittest.TestCase):
-    def setUp(self):
-        self.valid_csr = CSR.from_pem(VALID_CSR)
+class TestMixin(object):
 
     def test_subject(self):
         expected_result = [
@@ -13,23 +13,46 @@ class TestCSR(unittest.TestCase):
         ]
 
         self.assertItemsEqual(
-            self.valid_csr.subject,
+            self.csr.subject,
             expected_result,
             "subject does not equal expected subject")
-
     def test_cn(self):
         self.assertEqual(
-            self.valid_csr.cn,
+            self.csr.cn,
             "www.decodecsr.co.uk",
             "expected cn value not found")
 
     def test_get_openssl_text_cn(self):
-        text = self.valid_csr.get_openssl_text()
-        print text
+        text = self.csr.get_openssl_text()
         self.assertRegexpMatches(
             text,
             "www.decodecsr.co.uk",
             "expected cn pattern not found")
+
+
+class TestValidCsrPEM(TestMixin, unittest.TestCase):
+    def setUp(self):
+        self.csr = CSR.from_pem(VALID_CSR)
+
+class TestValidCsrDER(TestMixin, unittest.TestCase):
+    def setUp(self):
+        binary_csr = get_binary_data_from_file("csr.der")
+        self.csr = CSR.from_binary(binary_csr)
+
+def get_binary_data_from_file(filename):
+    """
+    Reads and returns the binary data from the provided file.
+    It assumes the file will be in the same directory as this file
+    """
+
+    dir_name = os.path.dirname(os.path.realpath(__file__))
+    filename_full = os.path.join(dir_name, filename)
+    with open(filename_full, mode='rb') as file:
+            file_content = file.read()
+
+    return file_content
+
+
 
 
 VALID_CSR = """
