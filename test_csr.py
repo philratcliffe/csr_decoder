@@ -16,6 +16,7 @@ class TestMixin(object):
             self.csr.subject,
             expected_result,
             "subject does not equal expected subject")
+
     def test_cn(self):
         self.assertEqual(
             self.csr.cn,
@@ -29,15 +30,24 @@ class TestMixin(object):
             "www.decodecsr.co.uk",
             "expected cn pattern not found")
 
+    def test_get_pubkey_alg(self):
+        pk_alg = self.csr.get_pubkey_alg()
+        self.assertRegexpMatches(
+            pk_alg,
+            "RSA",
+            "expected public key algorithm pattern not found")
+
 
 class TestValidCsrPEM(TestMixin, unittest.TestCase):
     def setUp(self):
         self.csr = CSR.from_pem(VALID_CSR)
 
+
 class TestValidCsrDER(TestMixin, unittest.TestCase):
     def setUp(self):
         binary_csr = get_binary_data_from_file("csr.der")
         self.csr = CSR.from_binary(binary_csr)
+
 
 def get_binary_data_from_file(filename):
     """
@@ -47,12 +57,10 @@ def get_binary_data_from_file(filename):
 
     dir_name = os.path.dirname(os.path.realpath(__file__))
     filename_full = os.path.join(dir_name, filename)
-    with open(filename_full, mode='rb') as file:
-            file_content = file.read()
+    with open(filename_full, mode='rb') as f:
+            file_content = f.read()
 
     return file_content
-
-
 
 
 VALID_CSR = """
