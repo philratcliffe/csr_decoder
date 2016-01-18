@@ -1,4 +1,5 @@
 csr_decoder
 ===========
 
-decodes x.509 certificate requests
+Decodes x.509 certificate requests.
+Requires the pyOpenSSL package.
