@@ -16,16 +16,23 @@ E2gtYXyfY1xebfxbMzddKkl/OTRyBnBS1VemuG5XzUkU9b1dCoV6dcxGVb0K0Z9D
 """
 
 
+# Create a CSR object from a PEM encoded CSR
 valid_csr = CSR.from_pem(VALID_CSR)
+
+# Print some attributes
 print valid_csr.cn
 print valid_csr.get_openssl_text()
 
 raw_input("hit any key for next decode")
 
+# Read the binary encoded CSR from a file
 with open("csr.der", "rb") as f:
     der_csr = f.read()
 
+# Create a CSR object from a binary encoded CSR
 csr = CSR.from_binary(der_csr)
+
+# Print some attributes
 print valid_csr.cn
 print valid_csr.get_openssl_text()
 
