@@ -1,11 +1,17 @@
 import OpenSSL
 
-
 class CSR:
-    """Decodes CSRs"""
+    """Decodes PKCS#10 Certificate Signing Requests"""
 
     def __init__(self, x509):
-        self.x509 = x509
+        # The OpenSSL X509Req object
+        self._x509 = x509
+
+        # The Subject of the CSR represented as a DN
+        self._subject = None
+
+        # The CommonName RDN of the Subject DN
+        self._cn = None
 
     @classmethod
     def from_pem(cls, pem_csr):
@@ -27,7 +33,7 @@ class CSR:
         """Get the public key's algorithm"""
 
         try:
-            pk = self.x509.get_pubkey()
+            pk = self._x509.get_pubkey()
             type = pk.type()
         except:
             return "ERROR (unable to get public key info)"
@@ -44,22 +50,26 @@ class CSR:
     def cn(self):
         """Returns the CN from the subject if present"""
 
-        c = None
-        for rdn in self.subject:
-            if rdn[0] == "CN":
-                c = rdn[1]
-        return c
+        if self._cn is None:
+            for rdn in self.subject:
+                if rdn[0] == "CN":
+                    self._cn = rdn[1]
+                    break
+        return self._cn
 
     @property
     def subject(self):
         """Returns the subject of the CSR"""
 
-        return self.x509.get_subject().get_components()
+        if self._subject is None:
+            self._subject = self._x509.get_subject().get_components()
+        return self._subject
 
     def get_openssl_text(self):
         """Returns the OpenSSL output for the CSR"""
 
         text = OpenSSL.crypto.dump_certificate_request(
             OpenSSL.crypto.FILETYPE_TEXT,
-            self.x509)
+            self._x509)
         return text
+

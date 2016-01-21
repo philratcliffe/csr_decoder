@@ -1,6 +1,7 @@
 import os
 
 import unittest
+
 from csr import CSR
 
 
@@ -17,7 +18,19 @@ class TestMixin(object):
             expected_result,
             "subject does not equal expected subject")
 
+        # call again to check cached version
+        self.assertItemsEqual(
+            self.csr.subject,
+            expected_result,
+            "subject does not equal expected subject")
+
     def test_cn(self):
+        self.assertEqual(
+            self.csr.cn,
+            "www.decodecsr.co.uk",
+            "expected cn value not found")
+
+        # call again to check cached version
         self.assertEqual(
             self.csr.cn,
             "www.decodecsr.co.uk",
@@ -76,3 +89,6 @@ E2gtYXyfY1xebfxbMzddKkl/OTRyBnBS1VemuG5XzUkU9b1dCoV6dcxGVb0K0Z9D
 4d5P9aqq//WHGKIwDsfut4gAAjrOshLlw6b4eFLacuRLRVuv+qBE
 -----END CERTIFICATE REQUEST-----
 """
+
+if __name__ == "__main__":
+    unittest.main()
