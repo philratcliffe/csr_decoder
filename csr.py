@@ -13,9 +13,12 @@ class CSR:
         # The CommonName RDN of the Subject DN
         self._cn = None
 
+        # The OpenSSL text representation of the CSR
+        self._openssl_text = None
+
     @classmethod
     def from_pem(cls, pem_csr):
-        """Initialise CSR from a PEM encoded CSR"""
+        """Initialise from a PEM encoded CSR."""
 
         x509 = OpenSSL.crypto.load_certificate_request(
             OpenSSL.crypto.FILETYPE_PEM, pem_csr)
@@ -23,7 +26,7 @@ class CSR:
 
     @classmethod
     def from_binary(cls, binary_csr):
-        """Initialise CSR from a binary CSR"""
+        """Initialise from a binary CSR."""
 
         x509 = OpenSSL.crypto.load_certificate_request(
             OpenSSL.crypto.FILETYPE_ASN1, binary_csr)
@@ -65,11 +68,16 @@ class CSR:
             self._subject = self._x509.get_subject().get_components()
         return self._subject
 
-    def get_openssl_text(self):
+    @property
+    def openssl_text(self):
         """Returns the OpenSSL output for the CSR"""
 
-        text = OpenSSL.crypto.dump_certificate_request(
-            OpenSSL.crypto.FILETYPE_TEXT,
-            self._x509)
-        return text
+        if self._openssl_text == None:
+            self._openssl_text = OpenSSL.crypto.dump_certificate_request(
+                OpenSSL.crypto.FILETYPE_TEXT,
+                self._x509)
+        return self._openssl_text
+
+    def __str__(self):
+        return self.openssl_text
 

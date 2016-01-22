@@ -21,7 +21,7 @@ valid_csr = CSR.from_pem(VALID_CSR)
 
 # Print some attributes
 print valid_csr.cn
-print valid_csr.get_openssl_text()
+print valid_csr
 
 raw_input("hit any key for next decode")
 
@@ -34,5 +34,5 @@ csr = CSR.from_binary(der_csr)
 
 # Print some attributes
 print valid_csr.cn
-print valid_csr.get_openssl_text()
+print valid_csr.openssl_text
 
