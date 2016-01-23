@@ -36,8 +36,14 @@ class TestMixin(object):
             "www.decodecsr.co.uk",
             "expected cn value not found")
 
-    def test_get_openssl_text_cn(self):
-        text = self.csr.get_openssl_text()
+    def test_openssl_text(self):
+        text = self.csr.openssl_text
+        self.assertRegexpMatches(
+            text,
+            "www.decodecsr.co.uk",
+            "expected cn pattern not found")
+
+        # call again to check cached version
         self.assertRegexpMatches(
             text,
             "www.decodecsr.co.uk",

@@ -1,6 +1,19 @@
+"""Provides a class to decode PKCS#10 CSRs
+
+"""
+
 import OpenSSL
 
-class CSR:
+__title__ = 'CSR'
+__version__ = '0.1.0'
+__author__ = 'Phil Ratcliffe'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2016, Phil Ratcliffe'
+__docformat__ = 'restructuredtext'
+
+
+
+class CSR(object):
     """Decodes PKCS#10 Certificate Signing Requests"""
 
     def __init__(self, x509):
@@ -31,6 +44,9 @@ class CSR:
         x509 = OpenSSL.crypto.load_certificate_request(
             OpenSSL.crypto.FILETYPE_ASN1, binary_csr)
         return cls(x509)
+
+    def __str__(self):
+        return self.openssl_text
 
     def get_pubkey_alg(self):
         """Get the public key's algorithm"""
@@ -72,12 +88,10 @@ class CSR:
     def openssl_text(self):
         """Returns the OpenSSL output for the CSR"""
 
-        if self._openssl_text == None:
+        if self._openssl_text is None:
             self._openssl_text = OpenSSL.crypto.dump_certificate_request(
                 OpenSSL.crypto.FILETYPE_TEXT,
                 self._x509)
         return self._openssl_text
 
-    def __str__(self):
-        return self.openssl_text
 
