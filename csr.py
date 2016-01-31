@@ -2,6 +2,8 @@
 
 """
 
+import re
+
 import OpenSSL
 
 __title__ = 'CSR'
@@ -12,6 +14,7 @@ __copyright__ = 'Copyright 2016, Phil Ratcliffe'
 __docformat__ = 'restructuredtext'
 
 
+PEM_DNS_SANS = re.compile(r"(DNS:.*?)$", re.MULTILINE)
 
 class CSR(object):
     """Decodes PKCS#10 Certificate Signing Requests"""
