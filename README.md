@@ -1,18 +1,29 @@
-# CSR
+# CSR Decoder
 
-Simple class that decodes PKCS#10 x.509 certificate requests. The requests can 
+A Python class that decodes PKCS#10 x.509 certificate requests. The requests can
 be provided in either DER or PEM format.
 
-## Requirements
+## Installation
 
-Requires the pyOpenSSL package.
+    This code requires Python3 to run.
+    create a virtualenv
 
-## How to Try
+```bash
+$ git clone https://github.com/philratcliffe/csr_decoder.git
+```
 
-    pip install pyOpenSSL
-    git clone https://github.com/philratcliffe/csr_decoder.git
-    python example.py
+```bash
+$ pip install -r requirements.txt
+```
 
-## How to Run the Tests
+## Run the Example 
 
-    python test_csr.py
+```bash
+$ python example.py
+```
+
+## Run the Tests
+
+```bash
+$ python test_csr.py
+```
