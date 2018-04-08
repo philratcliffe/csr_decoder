@@ -9,12 +9,13 @@ import OpenSSL
 __title__ = 'CSR'
 __version__ = '0.1.0'
 __author__ = 'Phil Ratcliffe'
-__license__ = 'MIT'
-__copyright__ = 'Copyright 2016, Phil Ratcliffe'
+__license__ = 'GPL 3'
+__copyright__ = 'Copyright 2018, Phil Ratcliffe'
 __docformat__ = 'restructuredtext'
 
 
 PEM_DNS_SANS = re.compile(r"(DNS:.*?)$", re.MULTILINE)
+
 
 class CSR(object):
     """Decodes PKCS#10 Certificate Signing Requests"""
@@ -54,14 +55,11 @@ class CSR(object):
     def get_pubkey_alg(self):
         """Get the public key's algorithm"""
 
-        try:
-            pk = self._x509.get_pubkey()
-            type = pk.type()
-        except:
-            return "ERROR (unable to get public key info)"
+        pk = self._x509.get_pubkey()
+        type = pk.type()
 
-        # OpenSSL does not yet have a type for EC
-        # so google certs, for example, will be unknown
+        # OpenSSL does not yet have a type for EC, so google certs, for
+        # example, will have alg type of UNKNOWN.
         types = {
             OpenSSL.crypto.TYPE_RSA: "RSA",
             OpenSSL.crypto.TYPE_DSA: "DSA",
@@ -74,7 +72,7 @@ class CSR(object):
 
         if self._cn is None:
             for rdn in self.subject:
-                if rdn[0] == "CN":
+                if rdn[0] == b"CN":
                     self._cn = rdn[1]
                     break
         return self._cn
@@ -96,5 +94,3 @@ class CSR(object):
                 OpenSSL.crypto.FILETYPE_TEXT,
                 self._x509)
         return self._openssl_text
-
-

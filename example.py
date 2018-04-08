@@ -20,10 +20,6 @@ E2gtYXyfY1xebfxbMzddKkl/OTRyBnBS1VemuG5XzUkU9b1dCoV6dcxGVb0K0Z9D
 valid_csr = CSR.from_pem(VALID_CSR)
 
 # Print some attributes
-print valid_csr.cn
-print valid_csr
-
-raw_input("hit any key for next decode")
 
 # Read the binary encoded CSR from a file
 with open("csr.der", "rb") as f:
@@ -33,6 +29,7 @@ with open("csr.der", "rb") as f:
 csr = CSR.from_binary(der_csr)
 
 # Print some attributes
-print valid_csr.cn
-print valid_csr.openssl_text
+print(csr.cn.decode('utf-8'))
 
+# Print out the OpenSSL text representation of the CSR
+print(csr.openssl_text.decode('utf-8'))

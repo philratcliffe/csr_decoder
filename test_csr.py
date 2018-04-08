@@ -9,17 +9,17 @@ class TestMixin(object):
 
     def test_subject(self):
         expected_result = [
-            ('C', 'gb'), ('ST', 'staffs'), ('L', 'stoke'),
-            ('O', 'CSR Decoders'), ('CN', 'www.decodecsr.co.uk'),
+            (b'C', b'gb'), (b'ST', b'staffs'), (b'L', b'stoke'),
+            (b'O', b'CSR Decoders'), (b'CN', b'www.decodecsr.co.uk'),
         ]
 
-        self.assertItemsEqual(
+        self.assertCountEqual(
             self.csr.subject,
             expected_result,
             "subject does not equal expected subject")
 
         # call again to check cached version
-        self.assertItemsEqual(
+        self.assertCountEqual(
             self.csr.subject,
             expected_result,
             "subject does not equal expected subject")
@@ -27,33 +27,33 @@ class TestMixin(object):
     def test_cn(self):
         self.assertEqual(
             self.csr.cn,
-            "www.decodecsr.co.uk",
+            b'www.decodecsr.co.uk',
             "expected cn value not found")
 
         # call again to check cached version
         self.assertEqual(
             self.csr.cn,
-            "www.decodecsr.co.uk",
+            b'www.decodecsr.co.uk',
             "expected cn value not found")
 
     def test_openssl_text(self):
         text = self.csr.openssl_text
-        self.assertRegexpMatches(
+        self.assertRegex(
             text,
-            "www.decodecsr.co.uk",
+            b'www.decodecsr.co.uk',
             "expected cn pattern not found")
 
         # call again to check cached version
-        self.assertRegexpMatches(
+        self.assertRegex(
             text,
-            "www.decodecsr.co.uk",
+            b'www.decodecsr.co.uk',
             "expected cn pattern not found")
 
     def test_get_pubkey_alg(self):
         pk_alg = self.csr.get_pubkey_alg()
-        self.assertRegexpMatches(
+        self.assertRegex(
             pk_alg,
-            "RSA",
+            'RSA',
             "expected public key algorithm pattern not found")
 
 
