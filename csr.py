@@ -1,17 +1,15 @@
-"""Provides a class to decode PKCS#10 CSRs
+# -*- coding: utf-8 -*-
+"""Provides a class to decode a PKCS#10
 
+This module provides a class that takes a PKCS#10 in either DER or PEM format.
+It provides methods to inspect the attributes of the PKCS#10 object.
 """
 
 import re
-
 import OpenSSL
 
-__title__ = 'CSR'
-__version__ = '0.1.0'
 __author__ = 'Phil Ratcliffe'
-__license__ = 'GPL 3'
 __copyright__ = 'Copyright 2018, Phil Ratcliffe'
-__docformat__ = 'restructuredtext'
 
 
 PEM_DNS_SANS = re.compile(r"(DNS:.*?)$", re.MULTILINE)
