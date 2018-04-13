@@ -1,7 +1,8 @@
+
+import logging
 import os
-
+import sys
 import unittest
-
 from csr import CSR
 
 
@@ -56,6 +57,14 @@ class TestMixin(object):
             'RSA',
             "expected public key algorithm pattern not found")
 
+    def test_get_public_key_size(self):
+        size = self.csr.keysize
+        self.assertEqual(
+            size,
+            1024,
+            "key size is not the size expected")
+
+
 
 class TestValidCsrPEM(TestMixin, unittest.TestCase):
     def setUp(self):
@@ -97,4 +106,6 @@ E2gtYXyfY1xebfxbMzddKkl/OTRyBnBS1VemuG5XzUkU9b1dCoV6dcxGVb0K0Z9D
 """
 
 if __name__ == "__main__":
+    logging.basicConfig( stream=sys.stderr )
+    logging.getLogger( "SomeTest.testSomething" ).setLevel( logging.DEBUG )
     unittest.main()

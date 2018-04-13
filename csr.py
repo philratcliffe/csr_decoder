@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-"""Provides a class to decode a PKCS#10
+"""A class representing a PKCS#10 CSR.
 
-This module provides a class that takes a PKCS#10 in either DER or PEM format.
-It provides methods to inspect the attributes of the PKCS#10 object.
+This module provides a class that represents a PKCS#10 Certificate Signing
+Request. It provides methods that accept a PKCS#10 encoded in either DER or
+PEM format. It provides methods to inspect the attributes of the PKCS#10 object.
 """
 
-import re
 import OpenSSL
+import re
 
 __author__ = 'Phil Ratcliffe'
 __copyright__ = 'Copyright 2018, Phil Ratcliffe'
-
 
 PEM_DNS_SANS = re.compile(r"(DNS:.*?)$", re.MULTILINE)
 
@@ -41,7 +41,7 @@ class CSR(object):
 
     @classmethod
     def from_binary(cls, binary_csr):
-        """Initialise from a binary CSR."""
+        """Initialise from a DER  encoded CSR"""
 
         x509 = OpenSSL.crypto.load_certificate_request(
             OpenSSL.crypto.FILETYPE_ASN1, binary_csr)
@@ -51,7 +51,7 @@ class CSR(object):
         return self.openssl_text
 
     def get_pubkey_alg(self):
-        """Get the public key's algorithm"""
+        """Returns the public key's algorithm if it is avaialble"""
 
         pk = self._x509.get_pubkey()
         type = pk.type()
@@ -61,8 +61,16 @@ class CSR(object):
         types = {
             OpenSSL.crypto.TYPE_RSA: "RSA",
             OpenSSL.crypto.TYPE_DSA: "DSA",
+            # 408 should be crypto.TYPE_ECDSA, but most versions
+            # of OpenSSL Python module don't yet define it
+            408:"ECDSA",
         }
         return types.get(type, "UNKNOWN")
+
+    @property
+    def keysize(self):
+        size = self._x509.get_pubkey().bits()
+        return size
 
     @property
     def cn(self):
@@ -89,6 +97,5 @@ class CSR(object):
 
         if self._openssl_text is None:
             self._openssl_text = OpenSSL.crypto.dump_certificate_request(
-                OpenSSL.crypto.FILETYPE_TEXT,
-                self._x509)
+                OpenSSL.crypto.FILETYPE_TEXT, self._x509)
         return self._openssl_text
