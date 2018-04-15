@@ -1,4 +1,3 @@
-
 import logging
 import os
 import sys
@@ -7,63 +6,47 @@ from csr import CSR
 
 
 class TestMixin(object):
-
     def test_subject(self):
         expected_result = [
-            (b'C', b'gb'), (b'ST', b'staffs'), (b'L', b'stoke'),
-            (b'O', b'CSR Decoders'), (b'CN', b'www.decodecsr.co.uk'),
+            (b'C', b'gb'),
+            (b'ST', b'staffs'),
+            (b'L', b'stoke'),
+            (b'O', b'CSR Decoders'),
+            (b'CN', b'www.decodecsr.co.uk'),
         ]
 
-        self.assertCountEqual(
-            self.csr.subject,
-            expected_result,
-            "subject does not equal expected subject")
+        self.assertCountEqual(self.csr.subject, expected_result,
+                              "subject does not equal expected subject")
 
         # call again to check cached version
-        self.assertCountEqual(
-            self.csr.subject,
-            expected_result,
-            "subject does not equal expected subject")
+        self.assertCountEqual(self.csr.subject, expected_result,
+                              "subject does not equal expected subject")
 
     def test_cn(self):
-        self.assertEqual(
-            self.csr.cn,
-            b'www.decodecsr.co.uk',
-            "expected cn value not found")
+        self.assertEqual(self.csr.cn, b'www.decodecsr.co.uk',
+                         "expected cn value not found")
 
         # call again to check cached version
-        self.assertEqual(
-            self.csr.cn,
-            b'www.decodecsr.co.uk',
-            "expected cn value not found")
+        self.assertEqual(self.csr.cn, b'www.decodecsr.co.uk',
+                         "expected cn value not found")
 
     def test_openssl_text(self):
         text = self.csr.openssl_text
-        self.assertRegex(
-            text,
-            b'www.decodecsr.co.uk',
-            "expected cn pattern not found")
+        self.assertRegex(text, b'www.decodecsr.co.uk',
+                         "expected cn pattern not found")
 
         # call again to check cached version
-        self.assertRegex(
-            text,
-            b'www.decodecsr.co.uk',
-            "expected cn pattern not found")
+        self.assertRegex(text, b'www.decodecsr.co.uk',
+                         "expected cn pattern not found")
 
     def test_get_pubkey_alg(self):
         pk_alg = self.csr.get_pubkey_alg()
-        self.assertRegex(
-            pk_alg,
-            'RSA',
-            "expected public key algorithm pattern not found")
+        self.assertRegex(pk_alg, 'RSA',
+                         "expected public key algorithm pattern not found")
 
     def test_get_public_key_size(self):
         size = self.csr.keysize
-        self.assertEqual(
-            size,
-            1024,
-            "key size is not the size expected")
-
+        self.assertEqual(size, 1024, "key size is not the size expected")
 
 
 class TestValidCsrPEM(TestMixin, unittest.TestCase):
@@ -86,7 +69,7 @@ def get_binary_data_from_file(filename):
     dir_name = os.path.dirname(os.path.realpath(__file__))
     filename_full = os.path.join(dir_name, filename)
     with open(filename_full, mode='rb') as f:
-            file_content = f.read()
+        file_content = f.read()
 
     return file_content
 
@@ -106,6 +89,6 @@ E2gtYXyfY1xebfxbMzddKkl/OTRyBnBS1VemuG5XzUkU9b1dCoV6dcxGVb0K0Z9D
 """
 
 if __name__ == "__main__":
-    logging.basicConfig( stream=sys.stderr )
-    logging.getLogger( "SomeTest.testSomething" ).setLevel( logging.DEBUG )
+    logging.basicConfig(stream=sys.stderr)
+    logging.getLogger("SomeTest.testSomething").setLevel(logging.DEBUG)
     unittest.main()
