@@ -17,9 +17,13 @@ E2gtYXyfY1xebfxbMzddKkl/OTRyBnBS1VemuG5XzUkU9b1dCoV6dcxGVb0K0Z9D
 
 
 # Create a CSR object from a PEM encoded CSR
-valid_csr = CSR.from_pem(VALID_CSR)
+csr = CSR.from_pem(VALID_CSR)
 
 # Print some attributes
+print(csr.cn.decode('utf-8'))
+
+# Print out the OpenSSL text representation of the CSR
+print(csr.openssl_text.decode('utf-8'))
 
 # Read the binary encoded CSR from a file
 with open("csr.der", "rb") as f:
