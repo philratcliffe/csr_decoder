@@ -5,10 +5,14 @@ from csr import CSR
 
 class TestCsrDecoding(unittest.TestCase):
     def setUp(self):
-        self.ec_key_csr = get_csr_from_file('EC-CSR.pem')
+        self.ec_csr = get_csr_from_file('ec-csr.pem')
+        self.dsa_csr = get_csr_from_file('dsa-csr.pem')
 
     def test_ec_key_alg(self):
-        self.assertEqual(self.ec_key_csr.get_pubkey_alg(), 'ECDSA')
+        self.assertEqual(self.ec_csr.get_pubkey_alg(), 'ECDSA')
+
+    def test_dsa_key_alg(self):
+        self.assertEqual(self.dsa_csr.get_pubkey_alg(), 'DSA')
 
 def get_csr_from_file(filename):
     dir_name = os.path.dirname(os.path.realpath(__file__))
