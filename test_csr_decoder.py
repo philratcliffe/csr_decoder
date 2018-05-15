@@ -14,6 +14,7 @@ class TestCsrDecoding(unittest.TestCase):
 
     def test_dsa_key_alg(self):
         self.assertEqual(self.dsa_csr.get_pubkey_alg(), 'DSA')
+        self.assertEqual(self.dsa_csr.keysize, 1024)
 
 def get_csr_from_file(filename):
     dir_name = os.path.dirname(os.path.realpath(__file__))
