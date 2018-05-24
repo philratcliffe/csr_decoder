@@ -7,6 +7,7 @@ class TestCsrDecoding(unittest.TestCase):
     def setUp(self):
         self.ec_csr = get_csr_from_file('ec-csr.pem')
         self.dsa_csr = get_csr_from_file('dsa-csr.pem')
+        self.rsa_csr = get_csr_from_file('rsa-csr.pem')
 
     def test_ec_key_alg(self):
         self.assertEqual(self.ec_csr.get_pubkey_alg(), 'ECDSA')
@@ -15,6 +16,9 @@ class TestCsrDecoding(unittest.TestCase):
     def test_dsa_key_alg(self):
         self.assertEqual(self.dsa_csr.get_pubkey_alg(), 'DSA')
         self.assertEqual(self.dsa_csr.keysize, 1024)
+
+    def test_rsa_key_alg(self):
+        self.assertEqual(self.rsa_csr.keysize, 4096)
 
 def get_csr_from_file(filename):
     dir_name = os.path.dirname(os.path.realpath(__file__))
