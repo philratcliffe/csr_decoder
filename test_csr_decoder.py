@@ -18,6 +18,7 @@ class TestCsrDecoding(unittest.TestCase):
         self.assertEqual(self.dsa_csr.keysize, 1024)
 
     def test_rsa_key_alg(self):
+        self.assertEqual(self.rsa_csr.get_pubkey_alg(), 'RSA')
         self.assertEqual(self.rsa_csr.keysize, 4096)
 
 def get_csr_from_file(filename):
