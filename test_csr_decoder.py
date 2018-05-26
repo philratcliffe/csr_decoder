@@ -21,6 +21,10 @@ class TestCsrDecoding(unittest.TestCase):
         self.assertEqual(self.rsa_csr.get_pubkey_alg(), 'RSA')
         self.assertEqual(self.rsa_csr.keysize, 4096)
 
+    def test_rsa_cn(self):
+        self.assertEqual(self.rsa_csr.cn, b'rkc.com')
+
+
 def get_csr_from_file(filename):
     dir_name = os.path.dirname(os.path.realpath(__file__))
     fname = filename
