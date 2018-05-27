@@ -11,6 +11,8 @@ class TestCsrDecoding(unittest.TestCase):
 
     def test_ec_key_alg(self):
         self.assertEqual(self.ec_csr.get_pubkey_alg(), 'ECDSA')
+
+    def test_ec_key_len(self):
         self.assertEqual(self.ec_csr.keysize, 521)
 
     def test_dsa_key_alg(self):
