@@ -17,6 +17,8 @@ class TestCsrDecoding(unittest.TestCase):
 
     def test_dsa_key_alg(self):
         self.assertEqual(self.dsa_csr.get_pubkey_alg(), 'DSA')
+
+    def test_dsa_key_len(self):
         self.assertEqual(self.dsa_csr.keysize, 1024)
 
     def test_rsa_key_alg(self):
