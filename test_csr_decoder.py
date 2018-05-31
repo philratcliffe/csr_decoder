@@ -15,6 +15,10 @@ class TestCsrDecoding(unittest.TestCase):
     def test_ec_key_len(self):
         self.assertEqual(self.ec_csr.keysize, 521)
 
+    def test_ec_openssl_text(self):
+        text = self.ec_csr.openssl_text
+        self.assertRegex(text, b'acme')
+
     def test_dsa_key_alg(self):
         self.assertEqual(self.dsa_csr.get_pubkey_alg(), 'DSA')
 
@@ -26,7 +30,8 @@ class TestCsrDecoding(unittest.TestCase):
 
     def test_rsa_openssl_text(self):
         text = self.rsa_csr.openssl_text
-        self.assertRegex(text, b'rsa.com')
+        self.assertRegex(text, b'rkc.com')
+
 
     def test_rsa_key_len(self):
         self.assertEqual(self.rsa_csr.keysize, 4096)
