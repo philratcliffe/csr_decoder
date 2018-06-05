@@ -32,7 +32,6 @@ class TestCsrDecoding(unittest.TestCase):
         text = self.rsa_csr.openssl_text
         self.assertRegex(text, b'rkc.com')
 
-
     def test_rsa_key_len(self):
         self.assertEqual(self.rsa_csr.keysize, 4096)
 
