@@ -1,6 +1,5 @@
 import logging
 import os
-import sys
 import unittest
 from csr import CSR
 
