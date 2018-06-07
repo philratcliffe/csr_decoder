@@ -3,6 +3,7 @@ import os
 import logging
 from csr import CSR
 
+
 class TestCsrDecoding(unittest.TestCase):
     def setUp(self):
         self.ec_csr = get_csr_from_file('ec-csr.pem')
@@ -48,7 +49,10 @@ def get_csr_from_file(filename):
     csr = CSR.from_pem(pem)
     return csr
 
+
 if __name__ == '__main__':
     log_level = logging.ERROR
-    logging.basicConfig(format="%(levelname)s %(asctime)s %(funcName)s %(lineno)s %(message)s", level=log_level)
+    logging.basicConfig(
+        format="%(levelname)s %(asctime)s %(funcName)s %(lineno)s %(message)s",
+        level=log_level)
     unittest.main()
