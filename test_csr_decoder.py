@@ -30,6 +30,9 @@ class TestCsrDecoding(unittest.TestCase):
         text = self.dsa_csr.openssl_text
         self.assertRegex(text, b'test-dsa')
 
+    def test_dsa_cn(self):
+        self.assertEqual(self.dsa_csr.cn, b'test-dsa')
+
     def test_rsa_key_alg(self):
         self.assertEqual(self.rsa_csr.get_pubkey_alg(), 'RSA')
 
