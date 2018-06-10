@@ -20,6 +20,9 @@ class TestCsrDecoding(unittest.TestCase):
         text = self.ec_csr.openssl_text
         self.assertRegex(text, b'acme')
 
+    def test_ec_cn(self):
+        self.assertEqual(self.ec_csr.cn, b'www.acme.com')
+
     def test_dsa_key_alg(self):
         self.assertEqual(self.dsa_csr.get_pubkey_alg(), 'DSA')
 
