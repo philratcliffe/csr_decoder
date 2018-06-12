@@ -3,7 +3,8 @@
 
 This module provides a class that represents a PKCS#10 Certificate Signing
 Request. It provides methods that accept a PKCS#10 encoded in either DER or
-PEM format. It provides methods to inspect the attributes of the PKCS#10 object.
+PEM format. It provides methods to inspect the attributes of the PKCS#10
+object.
 """
 
 import OpenSSL
