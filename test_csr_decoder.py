@@ -59,6 +59,14 @@ def get_csr_from_pem_file(filename):
     csr = CSR.from_pem(pem)
     return csr
 
+def get_csr_from_binary_file(filename):
+    dir_name = os.path.dirname(os.path.realpath(__file__))
+    filename_full = os.path.join(dir_name, filename)
+    with open(filename_full, mode='rb') as f:
+        file_content = f.read()
+    csr = CSR.from_binary(file_content)
+    return csr
+
 if __name__ == '__main__':
     log_level = logging.ERROR
     logging.basicConfig(
