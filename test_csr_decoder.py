@@ -9,6 +9,7 @@ class TestCsrDecoding(unittest.TestCase):
         self.ec_csr = get_csr_from_pem_file('ec-csr.pem')
         self.dsa_csr = get_csr_from_pem_file('dsa-csr.pem')
         self.rsa_csr = get_csr_from_pem_file('rsa-csr.pem')
+        self.bin_csr = get_csr_from_binary_file('csr.der')
 
     def test_ec_key_alg(self):
         self.assertEqual(self.ec_csr.get_pubkey_alg(), 'ECDSA')
