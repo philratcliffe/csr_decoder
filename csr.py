@@ -64,7 +64,7 @@ class CSR(object):
             OpenSSL.crypto.TYPE_DSA: "DSA",
             # 408 should be crypto.TYPE_ECDSA, but most versions
             # of OpenSSL Python module don't yet define it
-            408:"ECDSA",
+            408: "ECDSA",
         }
         return types.get(type, "UNKNOWN")
 
