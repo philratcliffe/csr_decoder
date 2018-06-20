@@ -50,6 +50,8 @@ class TestCsrDecoding(unittest.TestCase):
     def test_rsa_cn(self):
         self.assertEqual(self.rsa_csr.cn, b'rkc.com')
 
+    def test_bin_csr_key_len(self):
+        self.assertEqual(self.bin_csr.keysize, 1024)
 
 def get_csr_from_pem_file(filename):
     dir_name = os.path.dirname(os.path.realpath(__file__))
