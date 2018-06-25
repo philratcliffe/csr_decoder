@@ -49,7 +49,7 @@ class CSR(object):
         return cls(x509)
 
     def __str__(self):
-        return self.openssl_text
+        return str(self.openssl_text)
 
     def get_pubkey_alg(self):
         """Returns the public key's algorithm if it is avaialble"""
