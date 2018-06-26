@@ -65,6 +65,7 @@ class TestCsrDecoding(unittest.TestCase):
     def test_bin_csr_str(self):
         self.assertRegex(str(self.bin_csr), 'RSA')
 
+
 def get_csr_from_pem_file(filename):
     dir_name = os.path.dirname(os.path.realpath(__file__))
     fname = filename
