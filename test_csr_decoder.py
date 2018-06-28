@@ -63,7 +63,7 @@ class TestCsrDecoding(unittest.TestCase):
         self.assertEqual(self.bin_csr.get_pubkey_alg(), 'RSA')
 
     def test_bin_csr_str(self):
-        self.assertRegex(str(self.bin_csr), 'RSA')
+        self.assertRegex(str(self.bin_csr), 'www.decodecsr.co.uk')
 
 
 def get_csr_from_pem_file(filename):
