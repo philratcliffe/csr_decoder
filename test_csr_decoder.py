@@ -75,6 +75,7 @@ def get_csr_from_pem_file(filename):
     csr = CSR.from_pem(pem)
     return csr
 
+
 def get_csr_from_binary_file(filename):
     dir_name = os.path.dirname(os.path.realpath(__file__))
     filename_full = os.path.join(dir_name, filename)
