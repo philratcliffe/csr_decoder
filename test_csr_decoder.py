@@ -84,6 +84,7 @@ def get_csr_from_binary_file(filename):
     csr = CSR.from_binary(file_content)
     return csr
 
+
 if __name__ == '__main__':
     log_level = logging.ERROR
     logging.basicConfig(
