@@ -1,6 +1,5 @@
 import logging
 import os
-import sys
 import unittest
 from csr import CSR
 
@@ -90,5 +89,7 @@ E2gtYXyfY1xebfxbMzddKkl/OTRyBnBS1VemuG5XzUkU9b1dCoV6dcxGVb0K0Z9D
 
 if __name__ == "__main__":
     log_level = logging.ERROR
-    logging.basicConfig(format="%(levelname)s %(asctime)s %(funcName)s %(lineno)s %(message)s", level=log_level)
+    logging.basicConfig(
+        format="%(levelname)s %(asctime)s %(funcName)s %(lineno)s %(message)s",
+        level=log_level)
     unittest.main()

@@ -3,7 +3,8 @@
 
 This module provides a class that represents a PKCS#10 Certificate Signing
 Request. It provides methods that accept a PKCS#10 encoded in either DER or
-PEM format. It provides methods to inspect the attributes of the PKCS#10 object.
+PEM format. It provides methods to inspect the attributes of the PKCS#10
+object.
 """
 
 import OpenSSL
@@ -48,7 +49,10 @@ class CSR(object):
         return cls(x509)
 
     def __str__(self):
-        return self.openssl_text
+        return str(self.openssl_text)
+
+    def __repr__(self):
+        return str(self.openssl_text)
 
     def get_pubkey_alg(self):
         """Returns the public key's algorithm if it is avaialble"""
@@ -63,7 +67,7 @@ class CSR(object):
             OpenSSL.crypto.TYPE_DSA: "DSA",
             # 408 should be crypto.TYPE_ECDSA, but most versions
             # of OpenSSL Python module don't yet define it
-            408:"ECDSA",
+            408: "ECDSA",
         }
         return types.get(type, "UNKNOWN")
 

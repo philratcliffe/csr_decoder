@@ -1,7 +1,7 @@
 # CSR Decoder
 
 A Python class that decodes PKCS#10 x.509 certificate requests. The requests can
-be provided in either DER or PEM format.
+be provided in either DER or PEM format. 
 
 ## Installation
 
@@ -27,4 +27,5 @@ $ python example.py
 
 ```bash
 $ python test_csr.py
+$ python test_csr_decoder.py
 ```
