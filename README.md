@@ -8,6 +8,7 @@ be provided in either DER or PEM format.
     This code requires Python3 to run.
     create a virtualenv
 
+Get the repo:
 ```bash
 $ git clone https://github.com/philratcliffe/csr_decoder.git
 ```
