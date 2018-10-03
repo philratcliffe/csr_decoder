@@ -67,6 +67,9 @@ class TestCsrDecoding(unittest.TestCase):
 
 
 def get_csr_from_pem_file(filename):
+    """ Read PEM encoded CSR
+    from a file.
+    """
     dir_name = os.path.dirname(os.path.realpath(__file__))
     fname = filename
     fname_full = os.path.join(dir_name, fname)
