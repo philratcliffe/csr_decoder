@@ -80,6 +80,9 @@ def get_csr_from_pem_file(filename):
 
 
 def get_csr_from_binary_file(filename):
+    """ Read  DER encoded CSR from a file.
+    Assumes file is located in the same directory as this file.
+    """
     dir_name = os.path.dirname(os.path.realpath(__file__))
     filename_full = os.path.join(dir_name, filename)
     with open(filename_full, mode='rb') as f:
