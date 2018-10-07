@@ -50,6 +50,9 @@ class TestCsrDecoding(unittest.TestCase):
     def test_rsa_cn(self):
         self.assertEqual(self.rsa_csr.cn, b'rkc.com')
 
+    def test_rsa_csr_str(self):
+        self.assertRegex(str(self.rsa_csr), 'rkc.com')
+
     def test_bin_csr_key_len(self):
         self.assertEqual(self.bin_csr.keysize, 1024)
 
