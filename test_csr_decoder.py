@@ -59,10 +59,10 @@ class TestCsrDecoding(unittest.TestCase):
     def test_bin_csr_cn(self):
         self.assertEqual(self.bin_csr.cn, b'www.decodecsr.co.uk')
 
-    def test_bin_csr_openssl_text(self):
+    def test_bin_openssl_text(self):
         self.assertRegex(self.bin_csr.openssl_text, b'www.decodecsr.co.uk')
 
-    def test_bin_csr_key_alg(self):
+    def test_bin_key_alg(self):
         self.assertEqual(self.bin_csr.get_pubkey_alg(), 'RSA')
 
     def test_bin_csr_str(self):
