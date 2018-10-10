@@ -16,7 +16,7 @@ E2gtYXyfY1xebfxbMzddKkl/OTRyBnBS1VemuG5XzUkU9b1dCoV6dcxGVb0K0Z9D
 """
 
 
-# Create a CSR object from a PEM encoded CSR
+# Create a CSR object from the PEM encoded CSR above.
 csr = CSR.from_pem(VALID_CSR)
 
 # Print some attributes
