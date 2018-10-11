@@ -19,7 +19,7 @@ E2gtYXyfY1xebfxbMzddKkl/OTRyBnBS1VemuG5XzUkU9b1dCoV6dcxGVb0K0Z9D
 # Create a CSR object from the PEM encoded CSR above.
 csr = CSR.from_pem(VALID_CSR)
 
-# Print some attributes
+# Print out the CN from the DN.
 print(csr.cn.decode('utf-8'))
 
 # Print out the OpenSSL text representation of the CSR
