@@ -25,7 +25,7 @@ print(csr.cn.decode('utf-8'))
 # Print out the OpenSSL text representation of the CSR
 print(csr.openssl_text.decode('utf-8'))
 
-# Read the binary encoded CSR from a file
+# Create a CSR object from a file containing a binary encoded CSR.
 with open("csr.der", "rb") as f:
     der_csr = f.read()
 
