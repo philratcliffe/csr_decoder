@@ -32,7 +32,7 @@ with open("csr.der", "rb") as f:
 # Create a CSR object from a binary encoded CSR
 csr = CSR.from_binary(der_csr)
 
-# Print some attributes
+# Print out the CN from the DN.
 print(csr.cn.decode('utf-8'))
 
 # Print out the OpenSSL text representation of the CSR
