@@ -37,3 +37,6 @@ print(csr.cn.decode('utf-8'))
 
 # Print out the OpenSSL text representation of the CSR
 print(csr.openssl_text.decode('utf-8'))
+
+# Print the type of the variable containing the CSR subject
+print("Type of csr.subject is: " + str(type(csr.subject)))
